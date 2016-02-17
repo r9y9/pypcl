@@ -9,7 +9,9 @@ import numpy as np
 import os
 from os.path import join
 
+# TODO
 pcl_ver = "1.8"
+vtk_ver = "7.1"
 
 min_cython_ver = '0.19.0'
 try:
@@ -48,6 +50,20 @@ ext_modules = cythonize(
                       ],
         library_dirs=["/usr/local/lib"],
         libraries=["pcl_common"],
+        extra_compile_args=["-std=c++11", "-stdlib=libc++",  "-mmacosx-version-min=10.8"],
+        extra_link_args=[],
+        language="c++"),
+        Extension(
+        name="pypcl.visualization",
+        sources=[
+            join("pypcl", "visualization" + ext),
+        ],
+        include_dirs=[np.get_include(),
+                      join("/usr/local/include/pcl-" + pcl_ver),
+                      "/usr/local/include/vtk-" + vtk_ver,
+                      ],
+        library_dirs=["/usr/local/lib"],
+        libraries=["pcl_visualization"],
         extra_compile_args=["-std=c++11", "-stdlib=libc++",  "-mmacosx-version-min=10.8"],
         extra_link_args=[],
         language="c++")
