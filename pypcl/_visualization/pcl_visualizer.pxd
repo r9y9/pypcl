@@ -2,9 +2,9 @@
 
 from libcpp.string cimport string
 
-cdef extern from "pcl/visualization/pcl_visualizer.h" namespace "pcl":
-    cdef cppclass _PCLVisualizer "pcl::visualization::PCLVisualizer":
-        _PCLVisualizer(string&, bool)
+cdef extern from "pcl/visualization/pcl_visualizer.h" namespace "pcl::visualization":
+    cdef cppclass PCLVisualizer:
+        PCLVisualizer(string&, bool)
 
         void spin()
         void spinOnce(int, bool)
